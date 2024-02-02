@@ -1,0 +1,30 @@
+version: "3.8"
+ 
+ 
+services:
+  app:
+    image: dep-ser.jar
+    ports:
+      - 8084:8083
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      #SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/empdb
+      #SPRING_DATASOURCE_USER: admin
+      #SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - db
+    command: sh -c "sleep 30 && java -jar dep-ser.jar"
+
+    
+  db:
+    image: mysql
+    environment:
+      #DATABASE_HOST: docker -mysql
+      #DATABASE_PORT: 3308
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: empdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+    ports:
+     - "3308:3306"
+   
